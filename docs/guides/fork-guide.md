@@ -203,7 +203,7 @@ Hal yang sengaja belum dikerjakan.
 **Tips:**
 - Semua bukti berupa **link ke repositori-mu** (file, folder, atau commit), bukan tangkapan layar saja.
 - Untuk PR yang sama, perbarui deskripsi lewat **Edit** saat status berubah. Jangan buat PR baru.
-- Catat progres setiap fase di `docs/progress/Pxx-nama-fase.md`, dan pakai kode job di pesan commit, misalnya `P01-J3: add Habit relationships`.
+- Catat progres setiap fase di `docs/progress/Pxx-nama-fase.md` (lihat bagian *Mencatat progres* di bawah), dan pakai kode job di pesan commit, misalnya `P01-J3: add Habit relationships`.
 
 #### Cara 1: lewat website
 1. Buka fork-mu di GitHub. Setelah `push`, muncul banner kuning **Compare & pull request**. Klik banner itu.
@@ -246,6 +246,72 @@ Setelah berhasil, terminal menampilkan link PR. Kirim link itu ke dosen jika bel
 | Muncul *This branch has conflicts* | Selesaikan conflict seperti di bagian 7, lalu `push`. |
 | Salah memilih base atau head | Klik **Edit** di samping judul PR untuk mengganti base, atau tutup PR dan buat ulang. |
 | `gh pr create` meminta login | Jalankan `gh auth login`. |
+
+### Mencatat progres (fase `Pxx` dan job `Jx`)
+
+Selain PR, catat progresmu di repo supaya dosen bisa melihat apa yang sudah selesai, buktinya, dan kapan selesai. Contoh nyata: [`docs/progress/P01-database-design.md`](../progress/P01-database-design.md).
+
+**Aturan penamaan**
+
+| Kode | Arti | Contoh |
+|---|---|---|
+| `Pxx` | Satu fase pekerjaan, satu file | `P01` database design, `P02` authentication |
+| `Jx` | Satu job di dalam fase | `J1` ERD, `J2` migrations |
+| Nama file | `docs/progress/Pxx-nama-fase.md` | `docs/progress/P01-database-design.md` |
+
+**Arti status**
+
+| Status | Arti |
+|---|---|
+| ⏳ Planned | Belum dimulai |
+| 🚧 In progress | Sedang dikerjakan |
+| ✅ Done | Selesai dan ada bukti |
+| ⛔ Blocked | Terhambat, tulis alasannya di catatan |
+
+**Kerangka file progres (bahasa Inggris)**
+
+````markdown
+# P01: Phase Title
+
+| | |
+|---|---|
+| **Status** | ✅ Done |
+| **Started** | YYYY-MM-DD |
+| **Completed** | YYYY-MM-DD |
+| **Branch** | `feature/nama-branch` |
+| **Pull request** | link PR |
+
+## Goal
+Apa yang ingin dicapai fase ini.
+
+## Jobs
+
+| Code | Job | Status | Completed | Proof |
+|---|---|---|---|---|
+| J1 | Job title | ✅ Done | YYYY-MM-DD | link |
+| J2 | Job title | 🚧 In progress | - | - |
+
+---
+
+### J1: Job title
+- **Status:** ✅ Done, YYYY-MM-DD
+- **What:** Apa yang dikerjakan.
+- **Proof:** link ke file, folder, atau commit di fork-mu.
+- **Verified:** perintah atau hasil pengecekan.
+- **Not done:** hal yang belum dikerjakan.
+
+## Next
+Fase berikutnya atau job yang tersisa.
+````
+
+**Cara memperbarui**
+1. Saat mulai mengerjakan job, ubah statusnya menjadi 🚧 In progress.
+2. Setelah selesai, isi bukti (link ke commit, file, atau folder di fork-mu), ubah menjadi ✅ Done, dan isi tanggal selesai di tabel dan di detail job.
+3. Tulis kode job di pesan commit, misalnya `P01-J3: add Habit relationships`.
+4. `push` ke branch yang sama. PR ikut ter-update, lalu perbarui bagian **What was done** dan **Status** di deskripsi PR lewat **Edit**.
+5. Untuk fase berikutnya, buat file baru `P02-nama-fase.md`. Jangan menimpa file fase sebelumnya.
+
+Gunakan link ke commit yang sudah di-push sebagai bukti. Link ke commit yang belum di-push tidak bisa dibuka dosen.
 
 ---
 
