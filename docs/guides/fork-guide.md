@@ -155,6 +155,56 @@ PR adalah cara mengirim pekerjaanmu ke repo dosen supaya beliau bisa melihat, me
 - Proyek berjalan: `php artisan migrate:fresh --seed` tidak error.
 - File `.env` dan folder `vendor/` tidak ikut ter-commit.
 
+#### Format judul dan deskripsi PR
+
+Dosen memeriksa banyak PR, jadi buat judul dan deskripsi dalam **bahasa Inggris** yang langsung menjelaskan tugas ke berapa, siapa pemiliknya, apa yang dikerjakan, dan apa buktinya. Jika dosen sudah menentukan format sendiri, ikuti format beliau.
+
+**Judul:**
+```
+[Assignment N] Assignment Topic - Full Name - NPM - Class
+```
+Contoh:
+```
+[Assignment 1] Table Relationships: Habit Tracker - Muhammad Dzakwan Najmi - 2410010454 - TI 5C REG BJB
+```
+Untuk tugas berikutnya cukup ganti nomor dan topiknya. Judul boleh diubah kapan saja lewat tombol **Edit** atau `gh pr edit <nomor> --repo <repo-dosen> --title "..."`.
+
+**Deskripsi (bahasa Inggris):** gunakan kerangka berikut.
+```markdown
+## Assignment
+Assignment N: assignment name.
+
+| | |
+|---|---|
+| **Student** | Nama |
+| **NPM** | ... |
+| **Class** | ... |
+| **Phase** | P01: nama fase |
+| **Status** | Done / In progress (tanggal) |
+| **Fork / branch** | link fork dan nama branch |
+
+## What was done
+| Job | Description | Status |
+|---|---|---|
+| J1 | ... | Done |
+
+## Proof
+- Progress report: link ke file di docs/progress
+- Link ke folder atau file penting di fork-mu
+- Link ke commit
+
+## How to verify
+Perintah untuk menjalankan dan mengecek hasilnya.
+
+## Not done yet
+Hal yang sengaja belum dikerjakan.
+```
+
+**Tips:**
+- Semua bukti berupa **link ke repositori-mu** (file, folder, atau commit), bukan tangkapan layar saja.
+- Untuk PR yang sama, perbarui deskripsi lewat **Edit** saat status berubah. Jangan buat PR baru.
+- Catat progres setiap fase di `docs/progress/Pxx-nama-fase.md`, dan pakai kode job di pesan commit, misalnya `P01-J3: add Habit relationships`.
+
 #### Cara 1: lewat website
 1. Buka fork-mu di GitHub. Setelah `push`, muncul banner kuning **Compare & pull request**. Klik banner itu.
    Jika banner tidak muncul, buka tab **Pull requests** lalu klik **New pull request**.
@@ -164,7 +214,7 @@ PR adalah cara mengirim pekerjaanmu ke repo dosen supaya beliau bisa melihat, me
    - **head repository:** fork-mu
    - **compare:** branch kerjamu, misalnya `feature/nama-fitur`
 3. Isi **judul**. Gunakan format yang jelas dan sertakan identitasmu, misalnya:
-   `Tugas Relasi Tabel - Nama Kamu - NPM - Kelas`
+   `[Assignment N] Topic - Your Name - NPM - Class` (lihat bagian format di atas)
 4. Isi **deskripsi**: ringkasan pekerjaan, apa yang sudah dites, dan identitasmu.
 5. Klik **Create pull request**.
 
@@ -174,7 +224,7 @@ gh pr create \
   --repo mirzayogy/laravel5d \
   --base main \
   --head USERNAME-KAMU:feature/nama-fitur \
-  --title "Tugas Relasi Tabel - Nama Kamu - NPM - Kelas" \
+  --title "[Assignment N] Topic - Your Name - NPM - Class" \
   --body "Ringkasan pekerjaan dan cara mengetesnya."
 ```
 Di Windows PowerShell, tulis perintah dalam satu baris atau ganti `\` di akhir baris dengan tanda backtick (`` ` ``).
