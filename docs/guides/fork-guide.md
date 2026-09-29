@@ -146,12 +146,56 @@ git push -u origin feature/nama-fitur      # kirim ke fork-mu
 
 Untuk `push` berikutnya di branch yang sama, cukup `git push`.
 
-### Membuat Pull Request (jika diminta dosen)
-1. Buka fork-mu di GitHub. Akan muncul banner **Compare & pull request**.
-2. Klik banner itu. Pastikan **base repository** adalah repo dosen dan **head repository** adalah fork-mu.
-3. Isi judul dan deskripsi, lalu klik **Create pull request**.
+### Membuat Pull Request (PR) ke repo dosen
 
-Atau lewat terminal: `gh pr create`.
+PR adalah cara mengirim pekerjaanmu ke repo dosen supaya beliau bisa melihat, mengomentari, dan menerimanya. Kamu tidak `push` ke repo dosen. Kamu `push` ke fork-mu sendiri, lalu meminta dosen mengambil perubahannya.
+
+**Sebelum membuat PR, pastikan:**
+- Semua perubahan sudah di-`commit` dan di-`push` ke branch di fork-mu.
+- Proyek berjalan: `php artisan migrate:fresh --seed` tidak error.
+- File `.env` dan folder `vendor/` tidak ikut ter-commit.
+
+#### Cara 1: lewat website
+1. Buka fork-mu di GitHub. Setelah `push`, muncul banner kuning **Compare & pull request**. Klik banner itu.
+   Jika banner tidak muncul, buka tab **Pull requests** lalu klik **New pull request**.
+2. Periksa empat kotak di bagian atas:
+   - **base repository:** repo dosen (`mirzayogy/laravel5d`)
+   - **base:** `main`
+   - **head repository:** fork-mu
+   - **compare:** branch kerjamu, misalnya `feature/nama-fitur`
+3. Isi **judul**. Gunakan format yang jelas dan sertakan identitasmu, misalnya:
+   `Tugas Relasi Tabel - Nama Kamu - NPM - Kelas`
+4. Isi **deskripsi**: ringkasan pekerjaan, apa yang sudah dites, dan identitasmu.
+5. Klik **Create pull request**.
+
+#### Cara 2: lewat terminal
+```bash
+gh pr create \
+  --repo mirzayogy/laravel5d \
+  --base main \
+  --head USERNAME-KAMU:feature/nama-fitur \
+  --title "Tugas Relasi Tabel - Nama Kamu - NPM - Kelas" \
+  --body "Ringkasan pekerjaan dan cara mengetesnya."
+```
+Di Windows PowerShell, tulis perintah dalam satu baris atau ganti `\` di akhir baris dengan tanda backtick (`` ` ``).
+
+Setelah berhasil, terminal menampilkan link PR. Kirim link itu ke dosen jika beliau memintanya.
+
+#### Setelah PR dibuat
+- **Revisi:** jika dosen meminta perubahan, kerjakan di branch yang sama, lalu `git add .`, `git commit`, dan `git push`. PR ikut ter-update otomatis. Jangan membuat PR baru.
+- **Komentar:** balas komentar dosen langsung di halaman PR.
+- **Status:** PR bisa berstatus *Open*, *Merged* (diterima), atau *Closed* (ditutup).
+- **Jangan menghapus branch** sebelum PR selesai, karena PR akan ikut rusak.
+- **Jangan mengganti nama branch** yang sudah dipakai PR.
+
+#### Kesalahan umum pada PR
+| Masalah | Solusi |
+|---|---|
+| Tidak ada tombol **Compare & pull request** | Buka tab **Pull requests**, lalu **New pull request**, dan pilih branch-mu di **compare**. |
+| PR berisi banyak file yang bukan buatanmu | Fork-mu tertinggal dari repo dosen. Ambil pembaruan dulu (bagian 7), lalu `push` lagi. |
+| Muncul *This branch has conflicts* | Selesaikan conflict seperti di bagian 7, lalu `push`. |
+| Salah memilih base atau head | Klik **Edit** di samping judul PR untuk mengganti base, atau tutup PR dan buat ulang. |
+| `gh pr create` meminta login | Jalankan `gh auth login`. |
 
 ---
 
@@ -200,5 +244,6 @@ git remote add upstream <url-dosen>         # sekali saja
 git switch -c feature/xxx                   # branch baru
 git add . && git commit -m "pesan"          # simpan perubahan
 git push -u origin feature/xxx              # kirim ke fork
+gh pr create --repo mirzayogy/laravel5d --base main --head USERNAME:feature/xxx   # buka PR
 git fetch upstream && git merge upstream/main   # ambil pembaruan dosen
 ```
