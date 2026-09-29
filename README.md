@@ -76,6 +76,10 @@ php artisan serve
 
 Then open <http://localhost:8000>.
 
+## Progress
+
+Phase progress (P01, ...) broken into jobs (J1, J2, ...) with proof, status, and completion dates: [`docs/progress`](docs/progress/P01-database-design.md).
+
 ## Contributing / Forking
 
 New to forking the course repository? See the step-by-step guide for Windows and macOS (in Indonesian): [`docs/guides/fork-guide.md`](docs/guides/fork-guide.md).
@@ -92,6 +96,7 @@ resources/views/   Blade templates
 docs/
   database/        ERD and relationship documentation
   guides/          Fork and Git workflow guide
+  progress/        Phase tracker (P01, ...)
 ```
 
 ## Roadmap
